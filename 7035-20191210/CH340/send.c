@@ -384,10 +384,10 @@ int send_file(int fd,FILE *filep,int size)
 					{
 						count++;
 						if(count == 10)
-							count=1;
+							count = 1;
 					
 						size_send += rsize;
-						rat = (float)size_send/size*100;
+						rat = (float)size_send / size * 100;
 						//printf("has send : %.4f %%\n", rat);
 						break;
 					}
@@ -398,8 +398,8 @@ int send_file(int fd,FILE *filep,int size)
 						int flag = 0;
 						while(i < 10)
 						{
-							retv=write(fd,st,rsize+5);  //发数据	
-							int aa=retv;
+							retv = write(fd, st, rsize + 5);  //发数据
+							int aa = retv;
 							
 							//printf("resend %d time", i);
 							while( (num = read(fd, r_buf, 4)) > 0 )
@@ -409,9 +409,9 @@ int send_file(int fd,FILE *filep,int size)
 									flag = 1;
 									count++;
 									if(count == 10)
-										count=1;
+										count = 1;
 									size_send += rsize;
-									rat = (float)size_send/size*100;
+									rat = (float)size_send / size * 100;
 									//printf("has send : %.4f %%\n", rat); 
 									break;
 								}
@@ -449,7 +449,7 @@ int send_file(int fd,FILE *filep,int size)
 			}
 		}
 	}
-	printf("---send-finished!---\nfilesize：%.1f  KB\n",(float)size/1000);
+	printf("---send-finished!---\nfilesize %.1f KB\n", (float)size / 1000);
 
 }
 
@@ -674,7 +674,7 @@ int main(int argc, char **argv)
 		printf("Usage: %s /dev/ttyUSBn	0(send)/1(receive)	filename \n",argv[0]);
 		return FALSE;
 	}
-    fd = UART0_Open(fd,argv[1]);
+    fd = UART0_Open(fd, argv[1]);
     do
 	{
 		err = UART0_Init(fd, 115200, 0, 8, 1, 'N');
@@ -694,7 +694,7 @@ int main(int argc, char **argv)
     else
 	{
 		FILE *fout;
-		fout = fopen(argv[3], "w");
+		fout = fopen(argv[3], "wb");
 		receive(fd, fout);
 		UART0_Close(fd);
 	}  
